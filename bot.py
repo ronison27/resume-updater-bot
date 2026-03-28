@@ -15,7 +15,7 @@ from telegram.ext import (
     ContextTypes
 )
 
-from config import TELEGRAM_BOT_TOKEN
+TELEGRAM_BOT_TOKEN = os.environ.get("TELEGRAM_BOT_TOKEN", "")
 from pdf_reader import extract_text_from_pdf
 from ai_engine import (
     analyze_resume,
