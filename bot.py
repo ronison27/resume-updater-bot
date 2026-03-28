@@ -1,4 +1,5 @@
 import os
+import sys
 import logging
 from telegram import (
     Update,
@@ -388,11 +389,21 @@ async def restart_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await query.edit_message_text("🔄 Restarting...")
     await update_command(query, context)
 
-
+try:
+    from config import TELEGRAM_BOT_TOKEN
+except ImportError:
+    TELEGRAM_BOT_TOKEN = os.environ.get("TELEGRAM_BOT_TOKEN", "")
 # ============ MAIN ============
 def main():
     """Start the bot"""
     print("🤖 Bot is starting...")
+   # Check if token exists
+    if not TELEGRAM_BOT_TOKEN:
+        print("❌ ERROR: TELEGRAM_BOT_TOKEN is empty!")
+        print("Please set it in Railway environment variables.")
+        sys.exit(1)
+
+    print(f"✅ Token loaded: {TELEGRAM_BOT_TOKEN[:10]}...")
 
     # Create application
     app = Application.builder().token(TELEGRAM_BOT_TOKEN).build()
@@ -434,8 +445,10 @@ def main():
 
     # Start polling
     print("✅ Bot is running!")
-    app.run_polling(allowed_updates=Update.ALL_TYPES)
-
+    app.run_polling(
+        allowed_updates=Update.ALL_TYPES,
+        drop_pending_updates=True
+    )
 
 if __name__ == "__main__":
     main()
