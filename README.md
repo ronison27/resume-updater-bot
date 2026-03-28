@@ -1,6 +1,7 @@
 # 🤖 AI Resume Updater — Telegram Bot
 
 A Telegram bot that uses AI to update your resume based on any Job Description (JD).
+https://t.me/jobresumeeditorbot <-- click 
 
 ## ✨ Features
 
