@@ -5,15 +5,15 @@ If one fails, automatically tries the next!
 
 Updated: Migrated to Google GenAI SDK
 """
+import os
 
-# ============ IMPORT API KEYS ============
-from config import (
-    GROQ_API_KEY,
-    GEMINI_API_KEY,
-    OPENROUTER_API_KEY,
-    COHERE_API_KEY,
-    HUGGINGFACE_API_KEY
-)
+# ============ API KEYS FROM ENVIRONMENT ============
+
+GROQ_API_KEY = os.environ.get("GROQ_API_KEY", "")
+GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY", "")
+OPENROUTER_API_KEY = os.environ.get("OPENROUTER_API_KEY", "")
+COHERE_API_KEY = os.environ.get("COHERE_API_KEY", "")
+HUGGINGFACE_API_KEY = os.environ.get("HUGGINGFACE_API_KEY", "")
 
 
 # ============ API 1: GROQ (Fastest) ============
